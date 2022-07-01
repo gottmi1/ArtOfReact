@@ -2,12 +2,14 @@ import React from "react";
 import "./TodoList.scss";
 import TodoListItem from "./TodoListItem";
 
-export default function TodoList() {
+const TodoList = (props) => {
   return (
     <div className="TodoList">
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
+      {props.todos.map((todo) => (
+        <TodoListItem todo={todo} key={todo.id} />
+      ))}
     </div>
   );
-}
+};
+
+export default TodoList;
