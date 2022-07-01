@@ -39,10 +39,31 @@ function App() {
     [todos]
   );
 
+  // todos = 위에 만든 배열, todo = 배열 안에 든 객체 하나 하나
+  // 선택한 객체의 id를 제외한 나머지 배열을 setTodos에 넣는 함수.
+  const onRemove = useCallback(
+    (id) => {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos]
+  );
+  // 선택한 객체의 id가 같을경우 나머지 모든 객체(...todo) + 해당객체의 checked를 반전시킨 값을 setTodos에 넣는 함수.
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo
+        )
+      );
+    },
+    [todos]
+  );
+
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onRemove={onRemove} onT={onToggle} />
+      {/* 여기서 onToggle은 App.js에서 만든 함수이고, onT는 TodoList에서 사용할 props임. */}
     </TodoTemplate>
   );
 }
