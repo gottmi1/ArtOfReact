@@ -11,21 +11,19 @@ function App() {
   });
 
   // input 수정 함수
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setForm(
-        //   {
-        //   ...form,
-        //   [name]: [value],
-        // }
-        produce(form, (draft) => {
-          draft[name] = value;
-        })
-      );
-    },
-    [form]
-  );
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setForm(
+      //   {
+      //   ...form,
+      //   [name]: [value],
+      // }
+      // produce함수에 첫번째 파라미터가 함수형태라면, 업데이트 함수를 반환한다.
+      produce((draft) => {
+        draft[name] = value;
+      })
+    );
+  }, []);
 
   // form 등록 함수
   const onSubmit = useCallback(
@@ -44,7 +42,7 @@ function App() {
         //   ...data,
         //   array: data.array.concat(info),
         // }
-        produce(data, (draft) => {
+        produce((draft) => {
           draft.array.push(info);
         })
       );
@@ -56,27 +54,24 @@ function App() {
       });
       nextId.current += 1;
     },
-    [data, form.name, form.username, form.sib]
+    [form.name, form.username, form.sib]
   );
 
   // 항목 삭제 함수
-  const onRemove = useCallback(
-    (id) => {
-      setData(
-        //   {
-        //   ...data,
-        //   array: data.array.filter((info) => info.id !== id),
-        // }
-        produce(data, (draft) => {
-          draft.array.splice(
-            draft.array.findIndex((info) => info.id === id),
-            1
-          );
-        })
-      );
-    },
-    [data]
-  );
+  const onRemove = useCallback((id) => {
+    setData(
+      //   {
+      //   ...data,
+      //   array: data.array.filter((info) => info.id !== id),
+      // }
+      produce((draft) => {
+        draft.array.splice(
+          draft.array.findIndex((info) => info.id === id),
+          1
+        );
+      })
+    );
+  }, []);
 
   return (
     <div>
