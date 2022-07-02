@@ -1,5 +1,6 @@
 import "./App.css";
 import { useRef, useCallback, useState } from "react";
+import produce from "immer";
 
 function App() {
   const nextId = useRef(1);
@@ -13,10 +14,15 @@ function App() {
   const onChange = useCallback(
     (e) => {
       const { name, value } = e.target;
-      setForm({
-        ...form,
-        [name]: [value],
-      });
+      setForm(
+        //   {
+        //   ...form,
+        //   [name]: [value],
+        // }
+        produce(form, (draft) => {
+          draft[name] = value;
+        })
+      );
     },
     [form]
   );
@@ -33,10 +39,15 @@ function App() {
       };
 
       // array에 새 항목 등록
-      setData({
-        ...data,
-        array: data.array.concat(info),
-      });
+      setData(
+        //   {
+        //   ...data,
+        //   array: data.array.concat(info),
+        // }
+        produce(data, (draft) => {
+          draft.array.push(info);
+        })
+      );
       // form 초기화
       setForm({
         name: "",
@@ -51,10 +62,18 @@ function App() {
   // 항목 삭제 함수
   const onRemove = useCallback(
     (id) => {
-      setData({
-        ...data,
-        array: data.array.filter((info) => info.id !== id),
-      });
+      setData(
+        //   {
+        //   ...data,
+        //   array: data.array.filter((info) => info.id !== id),
+        // }
+        produce(data, (draft) => {
+          draft.array.splice(
+            draft.array.findIndex((info) => info.id === id),
+            1
+          );
+        })
+      );
     },
     [data]
   );
