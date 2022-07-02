@@ -1,7 +1,19 @@
+.TodoListItem-virtualized {
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+  &:nth-child(even) {
+    background: #f8f9fa;
+  }
+}
+
 .TodoListItem {
   padding: 1rem;
   display: flex;
   align-items: center;
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
   &:nth-child(even) {
     background: #f8f9fa;
   }
@@ -38,8 +50,8 @@
     }
   }
 
-  & + & {
-    // 이 패턴은 항목 사이에 테두리를 추가해야 할 때 일반적으로 쓰인다. 해당 항목 다음에 오는 항목의 왼쪽에 추가 함.(::befor로 설정 하고 첫 번째 자식 지워 주는 것 보다 훨씬 편함)
-    border: 1px solid #dee2e6;
-  }
+  // & + & {
+  //   // 이 패턴은 항목 사이에 테두리를 추가해야 할 때 일반적으로 쓰인다. 해당 항목 다음에 오는 항목의 왼쪽에 추가 함.(::befor로 설정 하고 첫 번째 자식 지워 주는 것 보다 훨씬 편함)
+  //   border: 1px solid #dee2e6;
+  // }
 }
