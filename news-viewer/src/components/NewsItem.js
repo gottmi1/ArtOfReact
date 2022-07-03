@@ -38,7 +38,7 @@ export default function NewsItem({ article }) {
   const { title, description, url, urlToImage } = article;
   return (
     <NewItemBlock>
-      {/* 이미지가 있으면 이미지를 출력하는 요소를 보여줌 */}
+      {/* upToImage가 있으면 이미지를 출력하는 요소를 보여줌 */}
       {urlToImage && (
         <div className="thumbnail">
           <a href={url} target="_blink" rel="noopener noreferrer">
