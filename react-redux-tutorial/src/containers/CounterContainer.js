@@ -1,5 +1,5 @@
 import Counter from "../components/Counter";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { increase, decrease } from "../modules/counter";
 import { bindActionCreators } from "redux";
 
