@@ -1,0 +1,18 @@
+전체적인 흐름 
+모듈 작성 -> 루트 리듀서 작성 -> 스토어 생성 -> 컴포넌트 작성 -> 컨테이너 작성 -> App.js에서 보여줌
+
+미들웨어의 기본 구조 
+const mdWare => store => next => actions -> {};
+
+풀어서 쓰면 이와 같음
+function mdWare(store) {
+	retrun function(next) {
+		retrun function(action) {
+			여기 무언가
+		}
+	}
+}
+함수를 반환하는 함수를 반환하는 함수임.
+store는 리덕스 스토어 인스턴스, action은 디스패치된 액션임
+next(action)을 호출하면 다음 처리해야할 미들웨어에게 액션을 넘겨준다. 만약 그 다음 미들웨어가 없다면 리듀서에게 액션을 넘겨줌.
+미들웨어에서 next를 사용하지 않으면 액션이 리듀서에 전달되지 않고 무시된다.
